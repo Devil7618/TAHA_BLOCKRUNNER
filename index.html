@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#080b18">
+  <title>BLOCK-RYNNER: Riftbound</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/shop.css">
+</head>
+<body>
+  <canvas id="game" aria-label="BLOCK-RYNNER game canvas"></canvas>
+
+  <header id="hud" class="hidden" aria-live="polite">
+    <div class="hud-brand"><span class="logo-mark"></span><b>BLOCK-RYNNER</b></div>
+    <div class="hud-pill">LV <span id="hudLevel">1</span></div>
+    <div class="hud-pill">◆ <span id="hudCoins">0</span></div>
+    <div class="hud-pill">♥ <span id="hudLives">3</span></div>
+    <div class="hud-pill">⏱ <span id="hudTime">0:00</span></div>
+    <div id="bossBar" class="boss-bar hidden"><span id="bossName">BOSS</span><i><b id="bossHealth"></b></i></div>
+    <button id="pauseButton" class="icon-button" aria-label="Pause">Ⅱ</button>
+  </header>
+
+  <main id="shell">
+    <section id="mainMenu" class="screen active">
+      <div class="menu-backdrop"><div class="rift rift-a"></div><div class="rift rift-b"></div></div>
+      <div class="hero-panel">
+        <p class="eyebrow">THE RIFTS ARE OPEN</p>
+        <h1>BLOCK<span>-RYNNER</span></h1>
+        <p class="subtitle">RIFTBOUND</p>
+        <p class="menu-copy">Run, leap and fight through 100 handcrafted challenges across ten collapsing dimensions.</p>
+        <nav class="main-actions">
+          <button id="playButton" class="primary">PLAY</button>
+          <button data-open="levelSelect">LEVEL SELECT</button>
+          <button data-open="shopScreen">SHOP</button>
+          <button data-open="settingsScreen">SETTINGS</button>
+          <button data-open="helpScreen">HOW TO PLAY</button>
+        </nav>
+        <div class="save-summary"><span>Highest Rift</span><b id="menuProgress">1 / 100</b><span>Vault</span><b>◆ <span id="menuCoins">0</span></b></div>
+      </div>
+    </section>
+
+    <section id="levelSelect" class="screen overlay-screen">
+      <div class="wide-panel"><div class="panel-heading"><div><p class="eyebrow">RIFT MAP</p><h2>Choose a level</h2></div><button class="close" data-open="mainMenu">×</button></div><div id="levelGrid"></div></div>
+    </section>
+
+    <section id="shopScreen" class="screen overlay-screen">
+      <div class="wide-panel"><div class="panel-heading"><div><p class="eyebrow">GEAR BAY</p><h2>Shop</h2></div><div class="wallet">◆ <span id="shopCoins">0</span></div><button class="close" data-open="mainMenu">×</button></div><div class="shop-tabs"><button class="tab active" data-tab="cosmetic">COSMETICS</button><button class="tab" data-tab="upgrade">UPGRADES</button></div><div id="shopGrid" class="shop-grid"></div></div>
+    </section>
+
+    <section id="settingsScreen" class="screen overlay-screen">
+      <div class="panel compact"><div class="panel-heading"><div><p class="eyebrow">SYSTEMS</p><h2>Settings</h2></div><button class="close" data-open="mainMenu">×</button></div>
+        <label class="setting"><span>Music <b id="musicValue">60%</b></span><input id="musicVolume" type="range" min="0" max="100"></label>
+        <label class="setting"><span>Sound effects <b id="sfxValue">80%</b></span><input id="sfxVolume" type="range" min="0" max="100"></label>
+        <label class="toggle"><input id="screenShake" type="checkbox"><span></span> Screen shake</label>
+        <label class="toggle"><input id="reducedMotion" type="checkbox"><span></span> Reduced motion</label>
+        <button id="fullscreenButton">FULLSCREEN</button><button id="resetButton" class="danger">RESET PROGRESS</button>
+      </div>
+    </section>
+
+    <section id="helpScreen" class="screen overlay-screen"><div class="panel"><div class="panel-heading"><div><p class="eyebrow">FIELD MANUAL</p><h2>How to play</h2></div><button class="close" data-open="mainMenu">×</button></div><div class="help-grid"><div><kbd>A</kbd><kbd>D</kbd><p>Move</p></div><div><kbd>SPACE</kbd><p>Jump / double jump</p></div><div><kbd>SHIFT</kbd><p>Sprint</p></div><div><kbd>X</kbd><p>Fire in boss fights</p></div></div><p class="help-copy">Reach the rift gate, collect shards, stomp enemies and avoid hazards. Every tenth level is a boss battle. Mobile controls appear automatically on touch devices.</p></div></section>
+
+    <section id="pauseScreen" class="screen modal-screen"><div class="panel compact"><p class="eyebrow">RUN SUSPENDED</p><h2>Paused</h2><button id="resumeButton" class="primary">RESUME</button><button id="pauseShopButton">SHOP</button><button id="quitButton">MAIN MENU</button></div></section>
+    <section id="resultScreen" class="screen modal-screen"><div class="panel result-panel"><p id="resultEyebrow" class="eyebrow">RIFT STABILIZED</p><h2 id="resultTitle">Level Complete</h2><div id="resultStats" class="result-stats"></div><div class="row"><button id="replayButton">REPLAY</button><button id="nextButton" class="primary">NEXT LEVEL</button></div><div class="row result-secondary"><button id="resultShopButton">SHOP</button><button id="resultMenuButton">MAIN MENU</button></div></div></section>
+    <section id="dimensionIntro" class="screen dimension-intro"><p class="eyebrow">ENTERING DIMENSION</p><h2 id="dimensionName"></h2><p id="dimensionDesc"></p></section>
+  </main>
+
+  <div id="mobileControls" class="hidden"><div><button data-control="left">◀</button><button data-control="right">▶</button></div><div><button data-control="fire">✦</button><button data-control="jump" class="jump">▲</button></div></div>
+  <div id="toast" role="status"></div>
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>
